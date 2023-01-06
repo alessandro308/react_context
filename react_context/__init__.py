@@ -27,13 +27,13 @@ def get_context(key, default=None):
             return CURRENT_CONTEXT[frame_id][key][-1]
     return default
 
-def debug_context(key, logger=print):
+def debug_context(key, default=None, logger=print):
     global CURRENT_CONTEXT
     frames = inspect.stack()[1:]
     count = 0
     if not get_context(key):
         logger(f"Context not found for key {key}")
-        return
+        return default
         
     for frame in frames:
         frame_id = id(frame.frame)
