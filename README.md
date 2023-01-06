@@ -42,4 +42,4 @@ with use_context(something=123):
 To print in the console where a context has been defined in the stacktrace, replace `get_context` with `debug_context(key, logger=print)`
 
 ### For the complete implementation and behaviour, please check the [test file](https://github.com/alessandro308/react_context/blob/main/tests/test_react_context.py).
->>>>>>> origin/main
+
