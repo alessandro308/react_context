@@ -9,6 +9,8 @@ pip install react-context
 
 Inspired by [this reddit](https://discuss.python.org/t/react-context-api-in-python/5684), here a React Context-like API for Python to pass data down in thesub-function without polluting all the function parameters.
 
+Under the hood it uses `inspect.stack().frame` to register the element in the context manager. Frames may be available only in CPython. 
+
 # Define context values
 
 To define a context value use `use_context(**kargws)` function
