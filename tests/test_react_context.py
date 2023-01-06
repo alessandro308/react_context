@@ -1,6 +1,8 @@
 from react_context import get_context, use_context, debug_context
 from unittest import TestCase
 import pytest
+import asyncio
+from aiounittest import AsyncTestCase
 
 class UseContextTest(TestCase):
 
@@ -65,6 +67,24 @@ class UseContextTest(TestCase):
             self.assertEqual(456, value)
         value = nested_1_function()
         self.assertEqual('default_value', value)
+
+class UseContextAsyncTest(AsyncTestCase):
+    async def test_deep_nested_async(self):
+        async def nested_1_function():
+            await asyncio.sleep(0.1)
+            return get_context('something')
+        
+        def nested_2_function():
+            return nested_1_function()
+        
+        def nested_3_function():
+            return nested_2_function()
+            
+        with use_context(something=123):
+            value = await nested_3_function()
+            self.assertEqual(123, value)
+        value = await nested_3_function()
+        self.assertEqual(None, value)
 
         
 class DebugContextTest(TestCase):
