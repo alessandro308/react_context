@@ -3,6 +3,9 @@
 
 An API to pass data down in the sub-function inspired by React Context
 
+```
+pip install react-context
+```
 
 Inspired by (this reddit)[https://discuss.python.org/t/react-context-api-in-python/5684], here a React Context-like API for Python to pass data down in thesub-function without polluting all the function parameters.
 
