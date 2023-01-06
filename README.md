@@ -30,11 +30,12 @@ To retrieve the value, use `get_context(key)` function
 
 ```
 def nested_function():
-    return get_context('something')
+    return get_context('something', 'default_value')
 
 with use_context(something=123):
     value = nested_function()
     print(value) # 123
+print(nested_function()) # 'default_value'
 ```
 
 # How to debug the context 

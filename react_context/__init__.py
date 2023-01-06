@@ -18,14 +18,14 @@ def use_context(**kwargs):
             CURRENT_CONTEXT[caller_frame_id][key].pop()
 
 
-def get_context(key):
+def get_context(key, default=None):
     global CURRENT_CONTEXT
     frames = inspect.stack()
     for frame in frames:
         frame_id = id(frame.frame)
         if CURRENT_CONTEXT.get(frame_id, {}).get(key):
             return CURRENT_CONTEXT[frame_id][key][-1]
-    return None
+    return default
 
 def debug_context(key, logger=print):
     global CURRENT_CONTEXT

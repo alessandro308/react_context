@@ -52,6 +52,19 @@ class UseContextTest(TestCase):
             self.assertEqual(456, value)
         value = nested_1_function()
         self.assertEqual(None, value)
+    
+    def test_default_context(self):
+        def nested_1_function():
+            return get_context('something', 'default_value')
+            
+        with use_context(something=456):
+            with use_context(something=123):
+                value = nested_1_function()
+                self.assertEqual(123, value)
+            value = nested_1_function()
+            self.assertEqual(456, value)
+        value = nested_1_function()
+        self.assertEqual('default_value', value)
 
         
 class DebugContextTest(TestCase):
