@@ -35,4 +35,8 @@ with use_context(something=123):
     print(value) # 123
 ```
 
+# Debug the code
+
+To print in the console where a context has been defined in the stacktrace, replace `get_context` with `debug_context`
+
 ### For the complete implementation and behaviour, please check the test file.

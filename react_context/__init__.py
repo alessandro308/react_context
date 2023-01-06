@@ -20,9 +20,27 @@ def use_context(**kwargs):
 
 def get_context(key):
     global CURRENT_CONTEXT
-    stacks = inspect.stack()
-    for stack in stacks:
-        frame_id = id(stack.frame)
+    frames = inspect.stack()
+    for frame in frames:
+        frame_id = id(frame.frame)
         if CURRENT_CONTEXT.get(frame_id, {}).get(key):
             return CURRENT_CONTEXT[frame_id][key][-1]
+    return None
+
+def debug_context(key, logger=print):
+    global CURRENT_CONTEXT
+    frames = inspect.stack()[1:]
+    count = 0
+    if not get_context(key):
+        logger(f"Context not found for key {key}")
+        return
+        
+    for frame in frames:
+        frame_id = id(frame.frame)
+        if CURRENT_CONTEXT.get(frame_id, {}).get(key):
+            logger(" "*count + f"{frame.filename} (line {frame.lineno}) - {frame.function} <- Found context value defined here" )
+            return CURRENT_CONTEXT[frame_id][key][-1]
+        else:
+            logger(" "*count + f"{frame.filename} (line {frame.lineno}) - {frame.function}" )
+        count+=1
     return None

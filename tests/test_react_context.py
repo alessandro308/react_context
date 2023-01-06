@@ -1,5 +1,6 @@
-from react_context import get_context, use_context
+from react_context import get_context, use_context, debug_context
 from unittest import TestCase
+import pytest
 
 class UseContextTest(TestCase):
 
@@ -51,4 +52,32 @@ class UseContextTest(TestCase):
             self.assertEqual(456, value)
         value = nested_1_function()
         self.assertEqual(None, value)
+
         
+class DebugContextTest(TestCase):
+
+    @pytest.fixture(autouse=True)
+    def capfd(self, capfd):
+        self.capfd = capfd
+
+    def test_deep_nested(self):
+        
+        def nested_1_function():
+            return debug_context('something')
+        
+        def nested_2_function():
+            return nested_1_function()
+        
+        def nested_3_function():
+            return nested_2_function()
+            
+        with use_context(something=123):
+            value = nested_3_function()
+            
+        value = nested_3_function()
+
+        out, err = self.capfd.readouterr()
+        self.assertRegex(
+            out,
+            r"- test_deep_nested <- Found context value defined here"
+        )
