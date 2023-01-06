@@ -6,8 +6,6 @@ class UseContextTest(TestCase):
     def test_simple_context(self):
         def nested_function():
             return get_context('something')
-        import inspect
-        print('frame_id_original', id(inspect.stack()[0].frame))
         with use_context(something=123):
             value = nested_function()
             self.assertEqual(123, value)
