@@ -9,7 +9,7 @@ setup(
     name='react_context',
     packages=find_packages(include=['react_context']),
     version='0.5.1',
-    description='An API to pass data in the sub-function inspired by React Context',
+    description='An API to pass data in the nested functions inspired by React Context',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author='Alessandro Pagiaro',
