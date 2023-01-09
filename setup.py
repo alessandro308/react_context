@@ -8,7 +8,7 @@ long_description = (this_directory / "README.md").read_text()
 setup(
     name='react_context',
     packages=find_packages(include=['react_context']),
-    version='0.5.1',
+    version='1.0.0',
     description='An API to pass data in the nested functions inspired by React Context',
     long_description=long_description,
     long_description_content_type='text/markdown',
