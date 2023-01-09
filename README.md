@@ -13,7 +13,7 @@ Under the hood it uses `inspect.stack().frame` to register the element in the co
 
 # Define context values
 
-To define a context value use `use_context(**kargws)` function
+To define a context value use `create_context(**kargws)` function
 
 ```
 
